@@ -1,0 +1,21 @@
+version: '3'
+services:
+  mysql:
+    container_name: my_mysql
+    restart: always
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: '1234' # Cambia la contra a tu gusto
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./data:/var/lib/mysql 
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql 
+  php:
+    container_name: my_php
+    restart: always
+    image: jag41l/web_php
+    ports:
+      - "80:80"
+    volumes:
+      - ./html:/var/www/html 
